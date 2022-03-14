@@ -27,10 +27,10 @@ passport.use('local-registro', new LocalStrategy({
         console.log(req.body.password == req.body.passwordconfirmar)
         if (password.length <= 1 || req.body.nombres.length <= 1 ||
             req.body.passwordconfirmar <= 1 || correo.length <= 1) {
-            done(null, false, req.flash('mensajeRegistro', 'Porfavor Revise los campos.'))
+            return done(null, false, req.flash('mensajeRegistro', 'Porfavor Revise los campos.'))
         }
         if (!(req.body.password == req.body.passwordconfirmar)) {
-            done(null, false, req.flash('mensajeRegistro', 'Confirmacion de contrasena incorrecta.'))
+            return done(null, false, req.flash('mensajeRegistro', 'Confirmacion de contrasena incorrecta.'))
         }
         const newUser = new User()
         newUser.correo = correo
