@@ -1,6 +1,5 @@
 const passport = require('passport')
 const Strategy = require('passport-local/lib')
-const user = require('../models/user')
 const LocalStrategy = require('passport-local').Strategy
 
 const User = require('../models/user')
@@ -18,22 +17,22 @@ passport.use('local-registro', new LocalStrategy({
     usernameField: 'correo',
     passwordField: 'password',
     passReqToCallback: true
-}, async(req, correo, password, done) => {
+}, async(req, email, password, done) => {
 
-    const user = await User.findOne({ correo: correo })
+    const user = await User.findOne({ correo: email })
     if (user) {
         return done(null, false, req.flash('mensajeRegistro', 'El correo ya existe.'))
     } else {
         console.log(req.body.password == req.body.passwordconfirmar)
         if (password.length <= 1 || req.body.nombres.length <= 1 ||
-            req.body.passwordconfirmar <= 1 || correo.length <= 1) {
+            req.body.passwordconfirmar <= 1 || email.length <= 1) {
             return done(null, false, req.flash('mensajeRegistro', 'Porfavor Revise los campos.'))
         }
         if (!(req.body.password == req.body.passwordconfirmar)) {
             return done(null, false, req.flash('mensajeRegistro', 'Confirmacion de contrasena incorrecta.'))
         }
         const newUser = new User()
-        newUser.correo = correo
+        newUser.correo = email
         newUser.password = newUser.encryptPassword(password)
         newUser.nombres = req.body.nombres
         await newUser.save()
