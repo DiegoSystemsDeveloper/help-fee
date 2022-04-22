@@ -4,17 +4,17 @@ const passport = require('passport')
 
 
 router.get('/', (req, res, next) => {
-    res.render('index')
+    //res.render('index')
 })
 
 router.post('/signup', passport.authenticate('local-registro', {
-    successRedirect: '/home',
+    //successRedirect: '/home',
     failureRedirect: '/',
     passReqToCallback: true
 }))
 
 router.post('/signin', passport.authenticate('local-login', {
-    successRedirect: '/home',
+    //successRedirect: '/home',
     failureRedirect: '/',
     passReqToCallback: true
 }))
