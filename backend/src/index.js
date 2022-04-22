@@ -12,7 +12,7 @@ require('./database')
 require('./passport/local-auth')
 
 //settings
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 3001)
 app.set('ejs', engine)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
