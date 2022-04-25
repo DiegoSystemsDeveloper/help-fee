@@ -1,19 +1,47 @@
-const moongose = require('mongoose')
-const { Schema } = moongose
-const bcrypt = require('bcrypt-nodejs')
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
-const userSchema = new Schema({
-    correo: String,
-    password: String,
-    nombres: String
+const userSchema = new mongoose.Schema({
+    nombre: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true
+    },
+    token: {
+        type: String
+    },
+    confirmado: {
+        type: Boolean,
+        default: false
+    },
+}, {
+    timestamps: true
 })
 
-userSchema.methods.encryptPassword = (password) => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+
+userSchema.pre("save", async function(next) {
+    if (!this.isModified("password")) {
+        next()
+    }
+    const salt = await bcrypt.genSalt(10)
+    this.password = await bcrypt.hash(this.password, salt)
+})
+
+userSchema.methods.comprobarPassword = async function(passwordFormulario) {
+    return await bcrypt.compare(passwordFormulario, this.password)
 }
 
-userSchema.methods.comparePassword = function(password) {
-    return bcrypt.compareSync(password, this.password)
-}
+const User = mongoose.model('User', userSchema)
 
-module.exports = moongose.model('users', userSchema)
+export default User
