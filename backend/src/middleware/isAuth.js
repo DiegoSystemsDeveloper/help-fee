@@ -6,7 +6,6 @@ const isAuth = async(req, res, next) => {
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith("Bearer")
-
     ) {
         try {
             token = req.headers.authorization.split(' ')[1]
@@ -14,14 +13,13 @@ const isAuth = async(req, res, next) => {
             req.user = await User.findById(decoded.id).select('-password -confirmado -token -createdAt -updatedAt -__v')
             return next()
         } catch (error) {
-            return res.status(401).json({ msg: 'hubo un error' })
+            return res.status(401).json({ msg: 'Hubo un error en el servidor' })
         }
     }
     if (!token) {
         const error = new Error('Token invalido')
-        res.status(401).json({ msg: error.message })
+        return res.status(401).json({ msg: error.message })
     }
-    next()
 
 }
 
