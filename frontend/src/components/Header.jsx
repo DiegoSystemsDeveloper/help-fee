@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 const Header = () => {
+
+    //const [cerrarSesion, setCerrarSesion] = ({})
+
+    const handleSubmit = () => {
+
+    }
   return (
     <header className='px-4 py-5 bg-white border-b'>
         <div className='md:flex md:justify-between'>
@@ -18,6 +25,7 @@ const Header = () => {
                 <button
                     type="button"
                     className="text-white text-sm bg-sky-600 p-3 rounded-md uppercase font-bold"
+                    //onSubmit={handleSubmit}
                 >Cerrar Sesion</button>
             </div>
         </div>

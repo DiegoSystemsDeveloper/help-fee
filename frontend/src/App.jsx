@@ -9,25 +9,29 @@ import OlvidePassword from './pages/OlvidePassword'
 import NuevoPassword from './pages/NuevoPassword'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
 import {AuthProvider} from './context/AuthProvider'
+import { EntidadesProvider } from './context/EntidadesProvider'
 import Entidades from './pages/Entidades'
+import Entidad from './pages/Entidad'
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>    
-        <Routes>
-          <Route  path='/' element={<AuthLayout/>}>
-            <Route index element={<Login/>}/>
-            <Route path='registrar' element={<Registrar/>}/>
-            <Route path='olvide-password' element={<OlvidePassword/>}/>
-            <Route path='olvide-password/:token' element={<NuevoPassword/>}/>
-            <Route path='confirmar/:id' element={<ConfirmarCuenta/>}/>
-          </Route>
-
-          <Route path='/entidades' element={<RutaPrivada/>}>
-            <Route index element={<Entidades/>}/>
-          </Route>
-        </Routes>
+        <EntidadesProvider>
+          <Routes>
+            <Route  path='/' element={<AuthLayout/>}>
+              <Route index element={<Login/>}/>
+              <Route path='registrar' element={<Registrar/>}/>
+              <Route path='olvide-password' element={<OlvidePassword/>}/>
+              <Route path='olvide-password/:token' element={<NuevoPassword/>}/>
+              <Route path='confirmar/:id' element={<ConfirmarCuenta/>}/>
+            </Route>
+            <Route path='/entidades' element={<RutaPrivada/>}>
+              <Route index element={<Entidades/>}/>
+              <Route path=':id' element={<Entidad/>}/>
+            </Route>
+          </Routes>
+        </EntidadesProvider>
       </AuthProvider> 
     </BrowserRouter>
   )

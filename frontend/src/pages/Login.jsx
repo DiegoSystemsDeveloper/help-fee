@@ -10,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [alerta, setAlerta] = useState({})
 
+  const navigate = useNavigate()
+
   const {setAuth} = useAuth()
 
   const handleSubmit = async(e) => {
@@ -28,6 +30,7 @@ const Login = () => {
       setAlerta({})
       sessionStorage.setItem('token', data.token)
       setAuth(data)
+      navigate('/entidades')
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,
