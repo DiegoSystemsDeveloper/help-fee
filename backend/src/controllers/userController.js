@@ -85,6 +85,32 @@ const registrar = async(req, res) => {
     }
 }
 
+/**
+ * 
+ * @swagger
+ * 
+ * /api/usuarios/login:
+ *  post:
+ *      description: registra un nuevo usuario
+ *      tags:  [User]
+ *      requestBody:
+ *          required: false
+ *          content: 
+ *              aplication/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#components/schemas/User'
+ *      responses:
+ *          '200':
+ *              description: Usuario Comprobado
+ *          '500':
+ *              description: Hubo un error en el servidor
+ *          '404':
+ *              description: El usuario no existe
+ *          '403':
+ *              description: El usuario no ha sido confirmado
+ */
+
 const autenticar = async(req, res) => {
     const { email, password } = req.body
         //comprobar si existe el usuario
@@ -113,6 +139,30 @@ const autenticar = async(req, res) => {
     }
 
 }
+
+/**
+ * 
+ * @swagger
+ * 
+ * /api/usuarios/confirmar/:token:
+ *  get:
+ *      description: registra un nuevo usuario
+ *      tags:  [User]
+ *      requestBody:
+ *          required: false
+ *          content: 
+ *              aplication/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#components/schemas/User'
+ *      responses:
+ *          '200':
+ *              description: Usuario confirmado correctamente
+ *          '500':
+ *              description: Hubo un error en el servidor
+ *          '403':
+ *              description: Token invalido
+ */
 
 const confirmar = async(req, res) => {
     const { token } = req.params

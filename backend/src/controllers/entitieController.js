@@ -26,7 +26,14 @@ const registrarEntidad = async(req, res) => {
 }
 
 const obtenerEntidad = async(req, res) => {
+    const {id} = req.params
+    const entidad = Entitie.findById({id})
 
+    if(!entidad) {
+        const error = new Error('Registro no encontrado')
+        return res.status(404).json({msg: error.message})
+    }
+    res.status(200).json(entidad)
 }
 
 const obtenerEntidadesFiltradas = async(req, res) => {

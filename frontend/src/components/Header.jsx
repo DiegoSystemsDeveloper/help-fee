@@ -1,12 +1,15 @@
-import { Link } from "react-router-dom"
-import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import useAuth from "../hooks/useAuth"
 
 const Header = () => {
 
-    //const [cerrarSesion, setCerrarSesion] = ({})
+    const navigate = useNavigate()
+    const {auth, setAuth} = useAuth()
 
     const handleSubmit = () => {
-
+        sessionStorage.removeItem('token')
+        setAuth({}) //TODO:Borrar datos de autenticacion
+        navigate('/')
     }
   return (
     <header className='px-4 py-5 bg-white border-b'>
@@ -25,7 +28,7 @@ const Header = () => {
                 <button
                     type="button"
                     className="text-white text-sm bg-sky-600 p-3 rounded-md uppercase font-bold"
-                    //onSubmit={handleSubmit}
+                    onClick={handleSubmit}
                 >Cerrar Sesion</button>
             </div>
         </div>
