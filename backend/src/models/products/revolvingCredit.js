@@ -29,3 +29,7 @@ const revolvingCreditSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+const RevolvingCredit = mongoose.model('RevolvingCredit', revolvingCreditSchema)
+
+export { RevolvingCredit }

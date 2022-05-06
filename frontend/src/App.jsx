@@ -10,27 +10,32 @@ import NuevoPassword from './pages/NuevoPassword'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
 import {AuthProvider} from './context/AuthProvider'
 import { EntidadesProvider } from './context/EntidadesProvider'
+import { ProductosProvider } from './context/ProductosProvider'
 import Entidades from './pages/Entidades'
 import Entidad from './pages/Entidad'
+import TarjetasCredito from './pages/TarjetasCredito'
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>    
         <EntidadesProvider>
-          <Routes>
-            <Route  path='/' element={<AuthLayout/>}>
-              <Route index element={<Login/>}/>
-              <Route path='registrar' element={<Registrar/>}/>
-              <Route path='olvide-password' element={<OlvidePassword/>}/>
-              <Route path='olvide-password/:token' element={<NuevoPassword/>}/>
-              <Route path='confirmar/:id' element={<ConfirmarCuenta/>}/>
-            </Route>
-            <Route path='/entidades' element={<RutaPrivada/>}>
-              <Route index element={<Entidades/>}/>
-              <Route path=':id' element={<Entidad/>}/>
-            </Route>
-          </Routes>
+          <ProductosProvider>
+            <Routes>
+              <Route  path='/' element={<AuthLayout/>}>
+                <Route index element={<Login/>}/>
+                <Route path='registrar' element={<Registrar/>}/>
+                <Route path='olvide-password' element={<OlvidePassword/>}/>
+                <Route path='olvide-password/:token' element={<NuevoPassword/>}/>
+                <Route path='confirmar/:id' element={<ConfirmarCuenta/>}/>
+              </Route>
+              <Route path='/entidades' element={<RutaPrivada/>}>
+                <Route index element={<Entidades/>}/>
+                <Route path=':id' element={<Entidad/>}/>
+                <Route path=':id/tarjetas-de-credito' element={<TarjetasCredito/>}/>
+              </Route>
+            </Routes>
+          </ProductosProvider>
         </EntidadesProvider>
       </AuthProvider> 
     </BrowserRouter>

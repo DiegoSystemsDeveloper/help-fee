@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors';
 import routerUsuarios from './routes/userRoutes.js'
 import routerEntidades from './routes/entitieRoutes.js'
+import routerProductos from './routes/productRoutes.js'
 import conectar from './config/database.js';
 import dotenv from 'dotenv'
 import swaggerUi from 'swagger-ui-express'
@@ -69,6 +70,7 @@ app.use(cors(corsOption))
 //Routing
 app.use('/api/usuarios', routerUsuarios)
 app.use('/api/entidades', routerEntidades)
+app.use('/api/productos', routerProductos)
 
 app.listen(app.get('port'), () => {
     console.log("server on port", app.get('port'));

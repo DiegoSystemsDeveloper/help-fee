@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const creditCard = new mongoose.Schema({
+const creditCardSchema = new mongoose.Schema({
     nombre: {
         type: String,
         required: true,
@@ -44,6 +44,6 @@ const creditCard = new mongoose.Schema({
     timestamps: true
 })
 
-const CreditTarget = mongoose.model('CreditTarget', creditCard)
+const CreditCard = mongoose.model('CreditCard', creditCardSchema)
 
-export default CreditTarget
+export default CreditCard
