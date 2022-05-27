@@ -11,11 +11,22 @@ const registrarCreditCard = async(req, res) => {
     }
 }
 
-
 const obtenerCreditCards = async(req, res) => {
     const creditCards = await CreditCard.find()
     console.log(creditCards)
     res.status(200).json(creditCards)
 }
 
-export { registrarCreditCard, obtenerCreditCards }
+
+const obtenerCreditCard = async(req, res) => {
+    const { id } = req.params
+    const creditCard = await CreditCard.findById(id)
+    if (!creditCard) {
+        const error = new Error('El producto no existe')
+        res.status(404).json(error.message)
+        return
+    }
+    res.status(200).json(creditCard)
+}
+
+export { registrarCreditCard, obtenerCreditCards, obtenerCreditCard }

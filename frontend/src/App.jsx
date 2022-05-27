@@ -14,6 +14,7 @@ import { ProductosProvider } from './context/ProductosProvider'
 import Entidades from './pages/Entidades'
 import Entidad from './pages/Entidad'
 import TarjetasCredito from './pages/TarjetasCredito'
+import TarjetaCredito from './pages/TarjetaCredito'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                 <Route index element={<Entidades/>}/>
                 <Route path=':id' element={<Entidad/>}/>
                 <Route path=':id/tarjetas-de-credito' element={<TarjetasCredito/>}/>
+                <Route path=':id/tarjetas-de-credito/:id' element={<TarjetaCredito/>}/>
               </Route>
             </Routes>
           </ProductosProvider>
