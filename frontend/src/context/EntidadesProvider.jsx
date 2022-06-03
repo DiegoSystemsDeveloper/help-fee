@@ -1,4 +1,4 @@
-import { useEffect, createContext, useState } from "react";
+import { createContext, useState } from "react";
 import clienteAxios from '../config/clienteAxios'
 
 const EntidadesContext = createContext()

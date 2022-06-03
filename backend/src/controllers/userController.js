@@ -245,5 +245,15 @@ const perfil = async(req, res) => {
     res.json(user)
 }
 
+const actualizarTelefono = async(req, res) => {
+    const { id, telefono } = req.body
+    const user = await User.updateOne({ _id: id }, {
+        $set: {
+            telefono
+        }
+    })
+    console.log(user)
+    res.status(200).json('Modificado')
+}
 
-export { registrar, autenticar, confirmar, olvidePassword, comprobarToken, nuevoPassword, perfil }
+export { registrar, autenticar, confirmar, olvidePassword, comprobarToken, nuevoPassword, perfil, actualizarTelefono }

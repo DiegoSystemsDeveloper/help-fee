@@ -3,6 +3,7 @@ import useProductos from "../hooks/useProductos"
 import useEntidades from "../hooks/useEntidades"
 import { useEffect } from "react"
 import Cargando from "../components/Cargando"
+import GoBack from "../components/GoBack"
 
 const TarjetasCredito = () => {
 
@@ -18,6 +19,7 @@ const TarjetasCredito = () => {
   
   return (
     <>
+      <GoBack/>
       <h1 className='text-4xl font-black'>Tarjetas de Credito {nombre}</h1>
       <div className='mt-10 rounded-lg grid grid-cols-3 gap-3'>
       {productos.length ? 

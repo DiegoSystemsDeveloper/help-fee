@@ -2,12 +2,14 @@ import { Outlet, Navigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import Header from "../components/Header"
 import Sidebar from "../components/Sidebar"
+import Cargando from "../components/Cargando"
+
 
 const RutaPrivada = () => {
 
     const { auth, cargando } = useAuth()
 
-    if(cargando) return 'cargando...'
+    if(cargando) return <Cargando/>
   return (
     <>
         {auth._id ? 

@@ -1,12 +1,34 @@
-import { useEffect } from "react"
+import { useEffect, useState,  } from "react"
 import { useParams } from "react-router-dom"
 import useProductos from "../hooks/useProductos"
-import VscCreditCard from 'react-icons'
-
+import {BsCashCoin} from 'react-icons/bs'
+import {VscCreditCard} from 'react-icons/vsc'
+import {AiOutlinePercentage} from 'react-icons/ai'
+import {BsFillCalculatorFill} from 'react-icons/bs'
+import { IconContext } from "react-icons"
+import {MdSupportAgent} from 'react-icons/md'
+import ContactoModal from "../components/modals/ContactoModal"
+import SimuladorCreditCard from "../components/modals/SimuladorCreditCard"
+import GoBack from "../components/GoBack"
+import Cargando from "../components/Cargando"
 
 const TarjetaCredito = () => {
 
+    
+    const [alerta, setAlerta] = useState(false)
+    const [showSimulador, setShowSimulador] = useState(false)
+    const [showContacto, setShowContacto] = useState(false)
+
+    const abrirCerrarModalSimulador = () => {
+        setShowSimulador(!showSimulador)
+    }
+
+    const abrirCerrarModalContactar = () => {
+        setShowContacto(!showContacto)
+    }
+
     const {obtenerProducto, producto} = useProductos()
+
     const {id} = useParams()
 
     useEffect(()=> {
@@ -21,31 +43,72 @@ const TarjetaCredito = () => {
         interesMensual,
         tipo
     } = producto
+
+    if(alerta) {
+
+    }
+
   return (
     <>
-        <div className="rounded-md border bg-white p-5 w-4/5 shadow flex flex-col space-y-4">
-            <h1 className="font-black text-4xl uppercase text-sky-600 text-xl">{nombre}</h1>
-            <div className="p-5 font-bold">{descripcion}</div>
-            <div className="flex justify-between p-5 bg-sky-600 rounded-md border-2 text-white">
-                <div className="flex flex-col space-y-2 text-center">
-                    <div className="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 " viewBox="0 0 20 20" fill="white">
-                        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
-                    </svg>
+        {producto ? (
+            <>
+            <GoBack/>
+            <div className="rounded-md border bg-white p-5 w-4/5 shadow flex flex-col space-y-4">
+                <h1 className="font-black text-4xl uppercase text-sky-600 text-xl">{nombre}</h1>
+                <div className="p-3 font-bold">{descripcion}</div>
+                <div className="flex justify-between p-4 bg-sky-600 rounded border text-white border-black">
+                    <div className="items-center flex flex-col">
+                        <IconContext.Provider value={{ className: "flex-1" , size: '3em'}}>
+                            <BsCashCoin/>
+                        </IconContext.Provider>
+                        <h2 className="flex-1">Cupo entre</h2>
+                        <p className="font-bold flex-1 uppercase">${new Intl.NumberFormat().format(cupoMinimo)} y ${new Intl.NumberFormat().format(cupoMaximo)}</p>
                     </div>
-                    <h2 className="uppercase font-black">Cupo</h2>
-                    <p className="">${cupoMinimo} - ${cupoMaximo} <VscCreditCard/></p>
-                </div>
-                <div>
-                    <div>
-                        
+                    <div className="items-center flex flex-col">
+                        <IconContext.Provider value={{ className: "flex-1" , size: '3em'}}>
+                            <AiOutlinePercentage/>
+                        </IconContext.Provider>
+                        <h2 className="flex-1">Tasa</h2>
+                        <p className="font-bold flex-1 uppercase">{interesMensual*100}% y {interesAnual*100}%</p>
+                    </div>
+                    <div className="items-center flex flex-col">
+                        <IconContext.Provider value={{ className: "flex-1" , size: '3em'}}>
+                            <VscCreditCard />
+                        </IconContext.Provider>
+                        <h2 className="flex-1">Pide una tarjeta</h2>
+                        <p className="font-bold flex-1 uppercase">{tipo}</p>
                     </div>
                 </div>
-                <div>3</div>
+                <div className="flex flex-col items-center justify-evenly space-y-5 py-5">
+                    <button className="bg-sky-600 hover:bg-sky-800 text-white  py-2 px-4 rounded-full uppercase w-1/2 shadow transition-colors flex justify-center items-center"
+                    type="button" onClick={() => abrirCerrarModalSimulador()}
+                    >
+                        <p className="mr-2">ir al simulador</p><BsFillCalculatorFill/>
+                    </button>
+                    <button className="bg-sky-600 hover:bg-sky-800 text-white py-2 px-4 rounded-full uppercase w-1/2 shadow transition-colors flex justify-center items-center"
+                    type="button" onClick={() => abrirCerrarModalContactar()}
+                    >
+                        <p className="mr-2">quiero ser contactado</p><MdSupportAgent/>
+                    </button>
+                </div>
+                <>
+                    {showContacto ? 
+                    (<ContactoModal
+                        abrirCerrarModalContactar={abrirCerrarModalContactar}
+                        showContacto={showContacto}
+                        id={id}
+                    />): null}
+                    {showSimulador ? (
+                        <SimuladorCreditCard
+                            abrirCerrarModalSimulador={abrirCerrarModalSimulador}
+                            showSimulador={showSimulador}
+                        />
+                    ): null}
+    
+                </>
             </div>
-        </div>
-        
+        </>
+        ): <Cargando/>}
     </>
   )
 }
