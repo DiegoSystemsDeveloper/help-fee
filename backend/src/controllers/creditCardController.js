@@ -17,7 +17,6 @@ const obtenerCreditCards = async(req, res) => {
     res.status(200).json(creditCards)
 }
 
-
 const obtenerCreditCard = async(req, res) => {
     const { id } = req.params
     const creditCard = await CreditCard.findById(id)

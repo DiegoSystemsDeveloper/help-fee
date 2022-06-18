@@ -16,7 +16,7 @@ const __filename = fileURLToPath(
     import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//swagger
+//swagger 
 const swaggerSpec = {
     definition: {
         openapi: '3.0.0',
@@ -61,7 +61,6 @@ const corsOption = {
         } else {
             //No puede ingresar a la api
             callback(new Error('Error de cors'))
-
         }
     }
 }

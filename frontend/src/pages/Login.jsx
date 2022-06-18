@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
@@ -12,12 +12,12 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-  const {setAuth} = useAuth()
+  const { setAuth } = useAuth()
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if([email, password].includes('')) {
+    if ([email, password].includes('')) {
       setAlerta({
         msg: 'Todos los campos son obligatorios',
         error: true
@@ -26,7 +26,7 @@ const Login = () => {
     }
 
     try {
-      const {data} = await clienteAxios.post('/usuarios/login', {email, password})
+      const { data } = await clienteAxios.post('/usuarios/login', { email, password })
       setAlerta({})
       sessionStorage.setItem('token', data.token)
       setAuth(data)
@@ -40,60 +40,60 @@ const Login = () => {
 
   }
 
-  const {msg} = alerta
+  const { msg } = alerta
 
   return (
     <>
-      <h1 className="text-sky-600 font-black text-6xl capitalize">Inicia 
-      Sesión En <br />
+      <h1 className="text-sky-600 font-black text-6xl capitalize">Inicia
+        Sesión En <br />
         <span className="text-slate-700"> Help Fee</span>
       </h1>
 
-      {msg && (<Alerta alerta={alerta}/>)}
+      {msg && (<Alerta alerta={alerta} />)}
 
       <form action="" className="my-10 bg-white shadow rounded-lg p-10"
         onSubmit={handleSubmit}
       >
         <div className="my-5">
           <label className="text-gray-600 block text-xl font-bold" htmlFor="email">Email</label>
-          <input 
+          <input
             id="email"
             type="email"
             placeholder="Email"
             className="w-full mt-3 p-3 border bg-gray-50 rounded-xl"
             value={email}
-            onChange={e=> {setEmail(e.target.value)}} 
+            onChange={e => { setEmail(e.target.value) }}
           />
-        </div>  
+        </div>
         <div className="my-5">
           <label className="text-gray-600 block text-xl font-bold" htmlFor="password">Password</label>
-          <input 
+          <input
             id="password"
             type="password"
             placeholder="Password"
-            className="w-full mt-3 p-3 border bg-gray-50 rounded-xl" 
+            className="w-full mt-3 p-3 border bg-gray-50 rounded-xl"
             value={password}
-            onChange={e=> {setPassword(e.target.value)}} 
+            onChange={e => { setPassword(e.target.value) }}
           />
         </div>
-        <input 
-            type="submit"
-            value="Iniciar Sesión"
-            className="bg-sky-700 w-full mb-5 py-3 text-white uppercase font-bold rounded
+        <input
+          type="submit"
+          value="Iniciar Sesión"
+          className="bg-sky-700 w-full mb-5 py-3 text-white uppercase font-bold rounded
             hover:cursor-pointer hover:bg-sky-800 transition-colors"
-          />
+        />
       </form>
-      <nav className="lg:flex lg:justify-between"> 
-          <Link
-            className="block text-center my-5 text-slate-500 uppercase text-sm"
-            to="/registrar"
-          >¿No tienes una cuenta? Regístrate</Link>
+      <nav className="lg:flex lg:justify-between">
+        <Link
+          className="block text-center my-5 text-slate-500 uppercase text-sm"
+          to="/registrar"
+        >¿No tienes una cuenta? Regístrate</Link>
 
-          <Link
-            className="block text-center my-5 text-slate-500 uppercase text-sm"
-            to="/olvide-password"
-          >Olvide mi contraseña</Link>
-        </nav>
+        <Link
+          className="block text-center my-5 text-slate-500 uppercase text-sm"
+          to="/olvide-password"
+        >Olvide mi contraseña</Link>
+      </nav>
     </>
   )
 }

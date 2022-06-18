@@ -1,22 +1,21 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const PreviewEntidad = ({entidad}) => {
-    const {nombre, _id, descripcion} = entidad
-    
-  return (
-    <div className='border-b p-5 ' >
-        <Link
-            to={`${_id}`}
-            className="flex justify-items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-        >
-            <img className="object-cover  h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://www.valoraanalitik.com/wp-content/uploads/2021/04/Bancolombia1.jpg"></img>
-            <div className="flex flex-col justify-between p-4 leading-normal">
-                <h5 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">{nombre}</h5>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{descripcion}</p>
-            </div>
-        </Link>
-    </div>
-  )
+const PreviewEntidad = ({ entidad }) => {
+    const { nombre, _id, descripcion } = entidad
+
+    return (
+        <div className='border-b p-5' >
+            <Link to={_id}>
+                <div className='font-black flex align-center'>
+                    <img src="https://www.bancolombia.com/wps/wcm/connect/a6eb93f2-1594-4eae-ad34-1e387d7e4bac/logo-bancolombia+%281%29.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-a6eb93f2-1594-4eae-ad34-1e387d7e4bac-nAfKfrX" alt="img" className='border-solid border-2 border-sky-500  mr-5 rounded-md h-40' />
+                    <section className='flex flex-col text-2xl bg-sky-500 text-white text-center w-full rounded-md h-40 justify-center'>
+                        <h2>{nombre}</h2>
+                        <h3>{descripcion}</h3>
+                    </section>
+                </div>
+            </Link>
+        </div>
+    )
 }
 
 export default PreviewEntidad
