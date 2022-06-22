@@ -39,6 +39,16 @@ const creditCardSchema = new mongoose.Schema({
     entidad: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Entitie"
+    },
+    plazoMinimo: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    plazoMaximo: {
+        type: Number,
+        required: true,
+        trim: true
     }
 }, {
     timestamps: true
