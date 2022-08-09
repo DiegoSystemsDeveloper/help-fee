@@ -84,13 +84,17 @@ const TarjetaCredito = () => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-evenly space-y-5 py-5">
-              <button className="bg-sky-600 hover:bg-sky-800 text-white  py-2 px-4 rounded-full uppercase w-1/2 shadow transition-colors flex justify-center items-center"
-                type="button" onClick={() => abrirCerrarModalSimulador()}
+              <button
+                className="bg-sky-600 hover:bg-sky-800 text-white  py-2 px-4 rounded-full uppercase w-1/2 shadow transition-colors flex justify-center items-center"
+                type="button"
+                onClick={() => abrirCerrarModalSimulador()}
               >
                 <p className="mr-2">ir al simulador</p><BsFillCalculatorFill />
               </button>
-              <button className="bg-sky-600 hover:bg-sky-800 text-white py-2 px-4 rounded-full uppercase w-1/2 shadow transition-colors flex justify-center items-center"
-                type="button" onClick={() => abrirCerrarModalContactar()}
+              <button
+                className="bg-sky-600 hover:bg-sky-800 text-white py-2 px-4 rounded-full uppercase w-1/2 shadow transition-colors flex justify-center items-center"
+                type="button"
+                onClick={() => abrirCerrarModalContactar()}
               >
                 <p className="mr-2">quiero ser contactado</p><MdSupportAgent />
               </button>
@@ -128,7 +132,6 @@ const TarjetaCredito = () => {
                   setPlazo={setPlazo}
                 />)
                 : null}
-
             </>
           </div>
         </>
